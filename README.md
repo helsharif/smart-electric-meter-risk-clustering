@@ -49,6 +49,8 @@ Each record represents a timestamped measurement from a smart meter and includes
 * `y_Freq (Hz)`: Grid frequency
 * `meter`: Meter identifier
 
+Measurements in the original data were recorded every 3 minutes. For this project the data were aggregated to 30-minute intervals.
+
 High-frequency measurements allow the derivation of **power-quality signatures** for each meter.
 
 **Data Source:**
@@ -126,6 +128,19 @@ Silhouette scores indicate **moderate separation**, which is expected for real-w
 
 ## 📈 Cluster Results & Interpretation
 
+### K-Means Results Table
+
+Table: Smart meter cluster assignments and cluster sizes derived from k-means clustering (k = 4). Cluster sizes indicate the relative prevalence of stable, demand-variable, power-quality–volatile, and high-load meter behaviors within the dataset.
+
+| Cluster ID | Cluster Description            | # Meters | Meter IDs |
+|------------|--------------------------------|----------|--------|
+| 0 | Stable Baseline | 24 | BR02, BR03, BR05, BR07, BR08, BR09, BR10, BR11, BR13, BR14, BR15, BR16, BR17, BR19, BR20, BR22, BR27, BR28, BR29, BR30, BR49, BR50, BR51, BR52 |
+| 1 | Demand-Variable (Low Load) | 8 | BR33, BR34, BR39, BR42, BR43, BR44, BR46, BR48 |
+| 2 | Power-Quality Volatile | 6 | BR32, BR35, BR36, BR37, BR38, BR45 |
+| 3 | High-Load, High-Ramping | 8 | BR04, BR06, BR12, BR18, BR23, BR24, BR26, BR31 |
+
+
+
 ### Cluster Feature Heatmap (Normalized Centroids)
 
 The figure below shows **normalized (z-score) cluster centroids** across key load, voltage, frequency, and current features:
@@ -178,6 +193,9 @@ This project provides a **foundational behavioral segmentation** aligned with re
 │   ├── 01_feature_engineering.ipynb
 │   └──  02_kmeans.ipynb
 ├── results/
+│   ├── kmeans_results.csv
+│   ├── meter_cluster_assignments.csv
+│   ├── kmeans_cluster_summary.csv
 │   ├── kmeans_cluster_centroids_z.csv
 │   ├── K-Means Cluster Normalized Heatmap Result.png
 │   ├── K-Means Elbow Method Results.png

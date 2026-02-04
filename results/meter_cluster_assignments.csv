@@ -1,0 +1,47 @@
+meter,kmeans_cluster,cluster_label
+BR02,0,Stable Baseline
+BR03,0,Stable Baseline
+BR05,0,Stable Baseline
+BR07,0,Stable Baseline
+BR08,0,Stable Baseline
+BR09,0,Stable Baseline
+BR10,0,Stable Baseline
+BR11,0,Stable Baseline
+BR13,0,Stable Baseline
+BR14,0,Stable Baseline
+BR15,0,Stable Baseline
+BR16,0,Stable Baseline
+BR17,0,Stable Baseline
+BR19,0,Stable Baseline
+BR20,0,Stable Baseline
+BR22,0,Stable Baseline
+BR27,0,Stable Baseline
+BR28,0,Stable Baseline
+BR29,0,Stable Baseline
+BR30,0,Stable Baseline
+BR49,0,Stable Baseline
+BR50,0,Stable Baseline
+BR51,0,Stable Baseline
+BR52,0,Stable Baseline
+BR33,1,Demand-Variable (Low Load)
+BR34,1,Demand-Variable (Low Load)
+BR39,1,Demand-Variable (Low Load)
+BR42,1,Demand-Variable (Low Load)
+BR43,1,Demand-Variable (Low Load)
+BR44,1,Demand-Variable (Low Load)
+BR46,1,Demand-Variable (Low Load)
+BR48,1,Demand-Variable (Low Load)
+BR32,2,Power-Quality Volatile
+BR35,2,Power-Quality Volatile
+BR36,2,Power-Quality Volatile
+BR37,2,Power-Quality Volatile
+BR38,2,Power-Quality Volatile
+BR45,2,Power-Quality Volatile
+BR04,3,"High-Load, High-Ramping"
+BR06,3,"High-Load, High-Ramping"
+BR12,3,"High-Load, High-Ramping"
+BR18,3,"High-Load, High-Ramping"
+BR23,3,"High-Load, High-Ramping"
+BR24,3,"High-Load, High-Ramping"
+BR26,3,"High-Load, High-Ramping"
+BR31,3,"High-Load, High-Ramping"

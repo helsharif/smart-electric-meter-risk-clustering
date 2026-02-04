@@ -1,0 +1,5 @@
+Cluster ID,Cluster Description,# Meters,Meters
+0,Stable Baseline,24,"BR02, BR03, BR05, BR07, BR08, BR09, BR10, BR11, BR13, BR14, BR15, BR16, BR17, BR19, BR20, BR22, BR27, BR28, BR29, BR30, BR49, BR50, BR51, BR52"
+1,Demand-Variable (Low Load),8,"BR33, BR34, BR39, BR42, BR43, BR44, BR46, BR48"
+2,Power-Quality Volatile,6,"BR32, BR35, BR36, BR37, BR38, BR45"
+3,"High-Load, High-Ramping",8,"BR04, BR06, BR12, BR18, BR23, BR24, BR26, BR31"
