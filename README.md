@@ -112,12 +112,12 @@ A final choice of **k = 4** was selected to balance mathematical separation with
 ### Elbow Method
 The elbow curve shows diminishing returns beyond four clusters, indicating a reasonable trade-off between compactness and complexity.
 
-![Elbow Method for K-Means](results/K-Means Elbow Method Results.png)
+<img width="802" height="450" alt="image" src="https://github.com/user-attachments/assets/c73f9034-5433-4afc-bde5-5cccbac719be" />
 
 ### Silhouette Analysis
 Silhouette scores indicate **moderate separation**, which is expected for real-world AMI behavioral data where meter characteristics vary along a continuum rather than forming perfectly distinct groups.
 
-![Silhouette Analysis for K-Means](results/K-Means Silhouette Score Results.png)
+<img width="802" height="450" alt="image" src="https://github.com/user-attachments/assets/c05db34f-5586-4130-a7f3-a394813dd026" />
 
 
 
@@ -136,7 +136,7 @@ The figure below shows **normalized (z-score) cluster centroids** across key loa
 
 Each row represents a **behavioral fingerprint** for a cluster.
 
-![Cluster Feature Heatmap](results/K-Means Cluster Normalized Heatmap Result.png)
+<img width="802" height="450" alt="image" src="https://github.com/user-attachments/assets/3c5110dc-abf5-445b-8751-3c9e4fd9c8d7" />
 
 ### Cluster Narratives (k = 4)
 
