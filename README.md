@@ -65,28 +65,21 @@ Rather than clustering raw time-series data, this project aggregates measurement
 Example engineered features include:
 
 ### Load Behavior
-
-* Mean and peak kWh
-* Load variability and coefficient of variation
-* Load ramp rates
+- Mean energy consumption  
+- Load variability (coefficient of variation)  
+- Energy ramp rates (mean and 95th percentile)  
 
 ### Voltage Stability
-
-* Mean voltage
-* Voltage standard deviation
-* Frequency of voltage excursions
+- Mean voltage  
+- Voltage variability and ramping behavior  
 
 ### Frequency Stability
+- Frequency excursion rate outside nominal tolerance  
 
-* Mean frequency
-* Frequency deviation from nominal
-* Frequency variability
-
-### Operational Stress Proxies
-
-* Voltage–current correlation
-* Day vs night load ratios
-* Event counts (spikes, drops)
+### Electrical Stress & Coupling
+- Mean and peak current  
+- Voltage–current correlation  
+- Energy–voltage correlation  
 
 Each meter is represented as a **single feature vector**, enabling scalable fleet-level analysis.
 
@@ -108,17 +101,56 @@ Each meter is represented as a **single feature vector**, enabling scalable flee
 * Elbow method and silhouette scores for model selection
 * Cluster stability checks using multiple random initializations
 
+### Model Selection
+K-means was evaluated across multiple values of *k* using both inertia (elbow method) and silhouette score.  
+A final choice of **k = 4** was selected to balance mathematical separation with **operational interpretability**.
+
 ---
 
-## 📈 Cluster Interpretation
+## 📉 Model Diagnostics
 
-Clusters are analyzed and labeled based on their power-quality signatures, for example:
+### Elbow Method
+The elbow curve shows diminishing returns beyond four clusters, indicating a reasonable trade-off between compactness and complexity.
 
-* **Stable Load / Stable Voltage:** Likely healthy meters
-* **High Load Variability:** Potential demand stress or customer behavior effects
-* **Voltage Instability / Frequency Noise:** Possible feeder or transformer-level issues
+![Elbow Method for K-Means](results/K-Means Elbow Method Results.png)
 
-These interpretations are framed in **operational terms**, rather than purely statistical labels.
+### Silhouette Analysis
+Silhouette scores indicate **moderate separation**, which is expected for real-world AMI behavioral data where meter characteristics vary along a continuum rather than forming perfectly distinct groups.
+
+![Silhouette Analysis for K-Means](results/K-Means Silhouette Score Results.png)
+
+
+
+
+---
+
+## 📈 Cluster Results & Interpretation
+
+### Cluster Feature Heatmap (Normalized Centroids)
+
+The figure below shows **normalized (z-score) cluster centroids** across key load, voltage, frequency, and current features:
+
+- **Red:** Above-average behavior relative to the meter population  
+- **Blue:** Below-average behavior  
+- **White:** Near-average behavior  
+
+Each row represents a **behavioral fingerprint** for a cluster.
+
+![Cluster Feature Heatmap](results/K-Means Cluster Normalized Heatmap Result.png)
+
+### Cluster Narratives (k = 4)
+
+- **Cluster 0 – Stable Baseline Meters**  
+  Low energy consumption and ramping, with stable voltage and frequency behavior. Represents a healthy baseline population requiring minimal monitoring.
+
+- **Cluster 1 – Demand-Variable, Low-Load Meters**  
+  Low average consumption but high relative variability, likely driven by customer usage patterns rather than grid or asset stress.
+
+- **Cluster 2 – Power-Quality Volatile Meters**  
+  Elevated voltage variability, frequent frequency excursions, and strong voltage–load coupling. Indicative of upstream feeder or transformer-level stress and a high-priority group for reliability monitoring.
+
+- **Cluster 3 – High-Load, High-Ramping Meters**  
+  High consumption and rapid load changes with generally stable voltage and frequency. Important for capacity planning and understanding demand-driven stress amplification during peak events.
 
 ---
 
@@ -126,12 +158,12 @@ These interpretations are framed in **operational terms**, rather than purely st
 
 This analysis demonstrates how utilities can use AMI data to:
 
-* Proactively identify groups of meters with elevated outage risk
-* Prioritize field inspections and asset maintenance
-* Support targeted customer notifications during grid disturbances
-* Improve grid reliability metrics through early detection
+- Proactively identify groups of meters with elevated reliability risk  
+- Prioritize field inspections and asset maintenance  
+- Support targeted customer notifications during grid disturbances  
+- Establish a segmentation layer for downstream outage prediction or asset health models  
 
-While this project does not perform outage prediction, it provides a **foundational segmentation layer** that can support downstream predictive models.
+This project provides a **foundational behavioral segmentation** aligned with real utility workflows.
 
 ---
 
@@ -141,10 +173,15 @@ While this project does not perform outage prediction, it provides a **foundatio
 .
 ├── cleaned_data/
 │   └── SM Cleaned Data BR2019.csv
+│   └── SM Resampled Data BR2019 30min.csv
 ├── notebooks/
 │   ├── 01_feature_engineering.ipynb
-│   ├── 02_kmeans_clustering.ipynb
-│   └── 03_cluster_interpretation.ipynb
+│   └──  02_kmeans.ipynb
+├── results/
+│   ├── kmeans_cluster_centroids_z.csv
+│   ├── K-Means Cluster Normalized Heatmap Result.png
+│   ├── K-Means Elbow Method Results.png
+│   └── K-Means Silhouette Score Results.png
 └── README.md
 ```
 
@@ -155,7 +192,7 @@ While this project does not perform outage prediction, it provides a **foundatio
 * **Language:** Python
 * **Data Analysis:** Pandas, NumPy
 * **Machine Learning:** Scikit-learn
-* **Visualization:** Matplotlib, Seaborn, Plotly
+* **Visualization:** Plotly
 * **Methods:** Feature engineering, k-means clustering, validation metrics
 
 ---
